@@ -14,7 +14,7 @@ const tools = ["Blender", "Cinema 4D", "Houdini", "Unreal Engine", "Substance", 
 
     <div class="grid grid-cols-2 md:grid-cols-4 w-full divide-y md:divide-y-0 divide-border transition-colors duration-300">
         {tools.map((tool, idx) => (
-            <div class={`glow-container flex items-center justify-between p-6 md:p-8 hover:bg-text hover:text-bg transition-colors duration-300 cursor-default ${idx % 4 !== 3 ? 'md:hairline-r' : ''} ${idx % 2 !== 1 ? 'hairline-r md:border-r-0' : ''}`}>
+            <div class={`glow-container group flex items-center justify-between p-6 md:p-8 hover:bg-text hover:text-black transition-colors duration-300 cursor-default ${idx % 4 !== 3 ? 'md:hairline-r' : ''} ${idx % 2 !== 1 ? 'hairline-r md:border-r-0' : ''}`}>
                 <span class="text-[10px] font-bold uppercase tracking-[0.2em] italic opacity-50 group-hover:opacity-100">0{idx + 1}</span>
                 <span class="text-xs font-bold uppercase tracking-widest">{tool}</span>
             </div>

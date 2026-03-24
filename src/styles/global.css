@@ -6,9 +6,9 @@
   ========================================
 */
 :root {
-  --bg: #f3f4f1;
+  --bg: #F2F0EF;
   /* Fondo Claro */
-  --text: #0059ff;
+  --text: #1b6bff;
   /* Texto Oscuro */
   --border: rgba(0, 0, 0, 0.2);
   /* Líneas Claras */
@@ -16,11 +16,11 @@
 
 /* Modo Oscuro */
 :root.dark {
-  --bg: #002281;
+  --bg: #111827;
   /* Fondo Oscuro */
   --text: #ffffff;
   /* Texto Claro */
-  --border: rgba(255, 255, 255, 0.150);
+  --border: rgba(255, 255, 255, 0.15);
   /* Líneas Oscuras */
 }
 
@@ -42,8 +42,6 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  background-color: color-mix(in srgb, var(--bg) 95%, transparent);
-  backdrop-filter: blur(8px);
 }
 
 @media (min-width: 768px) {
@@ -59,8 +57,8 @@
   margin-left: 1rem;
   border-radius: 50px;
   border: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  background-color: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  background-color: color-mix(in srgb, var(--bg) 75%, transparent);
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -92,10 +90,11 @@
   }
 }
 
-/* Spotlight Glow Effect (Brutalist Difference Blending) */
+/* Spotlight Glow Effect */
 .glow-container {
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .glow-container::before {
@@ -106,17 +105,73 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Un gradiente radial blanco que se funde con fondo transparente */
-  background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(0, 60, 255, 0.5),
-      transparent 50%);
-  /* El modo difference invierte el color debajo de él (sobre negro será blanco, sobre blanco será negro) */
-  mix-blend-mode: difference;
-  z-index: 10;
-  transition: opacity 0.3s ease;
+  /* Un gradiente radial suave que se añade detrás de los textos */
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgb(255, 255, 255),
+      transparent 100%);
+  z-index: -1;
+  transition: opacity 0.4s ease;
   opacity: 0;
 }
 
 .glow-container:hover::before {
   opacity: 1;
+}
+
+/* Custom Webkit Scrollbar */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: var(--text);
+  border: 3px solid var(--bg);
+  border-radius: 20px;
+  min-height: 40px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--text) 70%, transparent);
+}
+
+/* Firefox Scrollbar */
+html,
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--text) var(--bg);
+}
+
+/* Theme Toggle Explicit Transforms */
+#sun-icon { transform: rotate(0deg) scale(1); }
+#moon-icon { transform: rotate(90deg) scale(0); }
+:root.dark #sun-icon { transform: rotate(-90deg) scale(0); }
+:root.dark #moon-icon { transform: rotate(0deg) scale(1); }
+
+/* Custom cursor only for non-touch devices */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+  #brutalist-cursor { display: flex; }
+}
+@media (pointer: coarse) {
+  #brutalist-cursor { display: none !important; }
+}
+
+/* Offset for floating capsule header */
+section[id], footer[id] {
+  scroll-margin-top: 120px;
 }
