@@ -1,0 +1,40 @@
+---
+// Projects.astro
+const projects = [
+    { title: "Project Title 01", tags: "Character · ZBrush", year: "2023" },
+    { title: "Project Title 02", tags: "Environment · Houdini", year: "2023" },
+    { title: "Project Title 03", tags: "Product · Cinema 4D", year: "2024" },
+    { title: "Project Title 04", tags: "Archviz · Substance", year: "2024" }
+];
+---
+<section id="works" class="w-full flex items-start flex-col hairline-b">
+    <div class="w-full p-6 md:p-12 hairline-b flex justify-between items-center transition-colors duration-300">
+        <h2 data-i18n="works.title" class="text-4xl md:text-6xl font-black tracking-tighter uppercase">Selected Works</h2>
+        <span data-i18n="works.hover" class="text-[10px] uppercase tracking-widest italic opacity-60">Hover to expand</span>
+    </div>
+
+    <!-- 4 Column Strict Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-4 w-full divide-y md:divide-y-0 md:divide-x divide-border">
+        {projects.map((proj, idx) => (
+            <div class="glow-container group relative flex flex-col justify-between p-6 md:p-8 aspect-square md:aspect-[3/4] hover:bg-text transition-colors duration-500 cursor-pointer overflow-hidden">
+                <!-- Data tags -->
+                <div class="flex justify-between items-start text-[10px] uppercase tracking-[0.15em] italic opacity-60 group-hover:opacity-100 group-hover:text-bg transition-colors duration-500 z-10 w-full mb-8 md:mb-0">
+                    <span>[{idx + 1}]</span>
+                    <span>{proj.year}</span>
+                </div>
+                
+                <!-- Number watermark (Swissfolio style) -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none z-0">
+                    <span class="text-[250px] font-black -rotate-90">0{idx + 1}</span>
+                </div>
+
+                <!-- Info -->
+                <div class="w-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="w-6 h-[1px] bg-text mb-4 group-hover:bg-bg group-hover:w-12 transition-all duration-500"></div>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-2 group-hover:text-bg transition-colors duration-500">{proj.title}</h3>
+                    <p class="text-[10px] uppercase tracking-widest italic group-hover:text-bg/70 transition-colors duration-500">{proj.tags}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

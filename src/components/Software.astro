@@ -1,0 +1,23 @@
+---
+// Software.astro
+const tools = ["Blender", "Cinema 4D", "Houdini", "Unreal Engine", "Substance", "ZBrush", "Photoshop", "After Effects"];
+---
+<section id="software" class="w-full flex flex-col hairline-b">
+    <div class="w-full p-6 md:p-12 hairline-b flex justify-between items-end transition-colors duration-300">
+        <h2 data-i18n="software.title" class="text-4xl md:text-5xl font-black tracking-tighter uppercase max-w-sm leading-none">
+            Software<br/>& Tools
+        </h2>
+        <span data-i18n="software.subtitle" class="text-[10px] uppercase tracking-widest italic opacity-60 max-w-[150px] text-right">
+            The technical stack behind the works
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 w-full divide-y md:divide-y-0 divide-border transition-colors duration-300">
+        {tools.map((tool, idx) => (
+            <div class={`glow-container flex items-center justify-between p-6 md:p-8 hover:bg-text hover:text-bg transition-colors duration-300 cursor-default ${idx % 4 !== 3 ? 'md:hairline-r' : ''} ${idx % 2 !== 1 ? 'hairline-r md:border-r-0' : ''}`}>
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] italic opacity-50 group-hover:opacity-100">0{idx + 1}</span>
+                <span class="text-xs font-bold uppercase tracking-widest">{tool}</span>
+            </div>
+        ))}
+    </div>
+</section>

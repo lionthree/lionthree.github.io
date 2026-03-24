@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* 
+  ========================================
+  COLORES DEL TEMA (FÁCILES DE MODIFICAR)
+  ========================================
+*/
+:root {
+  --bg: #f3f4f1;
+  /* Fondo Claro */
+  --text: #0059ff;
+  /* Texto Oscuro */
+  --border: rgba(0, 0, 0, 0.2);
+  /* Líneas Claras */
+}
+
+/* Modo Oscuro */
+:root.dark {
+  --bg: #002281;
+  /* Fondo Oscuro */
+  --text: #ffffff;
+  /* Texto Claro */
+  --border: rgba(255, 255, 255, 0.150);
+  /* Líneas Oscuras */
+}
+
+/* Inyectar variables a Tailwind (Usar como: bg-bg, text-text, border-border) */
+@theme {
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-border: var(--border);
+}
+
+/* Floating Capsule Header */
+#main-header {
+  top: 0;
+  width: 100%;
+  margin-left: 0;
+  border-radius: 0;
+  border: 1px solid transparent;
+  border-bottom: 0.5px solid var(--border);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: color-mix(in srgb, var(--bg) 95%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+@media (min-width: 768px) {
+  #main-header {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+}
+
+#main-header.capsule {
+  top: 1rem;
+  width: calc(100% - 2rem);
+  margin-left: 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  background-color: color-mix(in srgb, var(--bg) 85%, transparent);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+#mobile-menu {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mobile-menu.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+:root.dark #main-header.capsule {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  #main-header.capsule {
+    width: calc(100% - 4rem);
+    margin-left: 2rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* Spotlight Glow Effect (Brutalist Difference Blending) */
+.glow-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Un gradiente radial blanco que se funde con fondo transparente */
+  background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 60, 255, 0.5),
+      transparent 50%);
+  /* El modo difference invierte el color debajo de él (sobre negro será blanco, sobre blanco será negro) */
+  mix-blend-mode: difference;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.glow-container:hover::before {
+  opacity: 1;
+}
