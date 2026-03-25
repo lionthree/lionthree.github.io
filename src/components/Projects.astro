@@ -1,10 +1,10 @@
 ---
 // Projects.astro
 const projects = [
-    { title: "Project Title 01", tags: "Character · ZBrush", year: "2023" },
-    { title: "Project Title 02", tags: "Environment · Houdini", year: "2023" },
-    { title: "Project Title 03", tags: "Product · Cinema 4D", year: "2024" },
-    { title: "Project Title 04", tags: "Archviz · Substance", year: "2024" }
+    { title: "Head Of A Feathered Serpent", tags: "Prop · Blender", year: "2026", image: "/serpent_head_final.png" },
+    { title: "Project Title 02", tags: "Environment · Houdini", year: "2023", image: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1000&auto=format&fit=crop" },
+    { title: "Project Title 03", tags: "Product · Cinema 4D", year: "2024", image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop" },
+    { title: "Project Title 04", tags: "Archviz · Substance", year: "2024", image: "https://images.unsplash.com/photo-1506744626753-143d2f92d499?q=80&w=1000&auto=format&fit=crop" }
 ];
 ---
 <section id="works" class="w-full flex items-start flex-col hairline-b">
@@ -16,23 +16,28 @@ const projects = [
     <!-- 4 Column Strict Grid -->
     <div class="grid grid-cols-1 md:grid-cols-4 w-full divide-y md:divide-y-0 md:divide-x divide-border">
         {projects.map((proj, idx) => (
-            <div class="project-card glow-container group relative flex flex-col justify-between p-6 md:p-8 aspect-square md:aspect-[3/4] hover:bg-text transition-colors duration-500 cursor-pointer overflow-hidden" data-title={proj.title} data-tags={proj.tags} data-year={proj.year}>
+            <div class="project-card glow-container group relative flex flex-col justify-between p-6 md:p-8 aspect-square md:aspect-[3/4] hover:bg-text dark:hover:bg-transparent transition-colors duration-500 cursor-pointer overflow-hidden" data-title={proj.title} data-tags={proj.tags} data-year={proj.year} data-image={proj.image}>
+                
+
+                <!-- Background Image -->
+                <img src={proj.image} alt={proj.title} class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale blur-[2px] group-hover:opacity-100 group-hover:grayscale-0 group-hover:blur-none scale-105 group-hover:scale-110 transition-all duration-700 ease-out -z-20" />
+
                 <!-- Data tags -->
-                <div class="flex justify-between items-start text-[10px] uppercase tracking-[0.15em] italic opacity-60 group-hover:opacity-100 group-hover:text-black transition-colors duration-500 z-10 w-full mb-8 md:mb-0">
+                <div class="flex justify-between items-start text-[10px] uppercase tracking-[0.15em] italic opacity-60 group-hover:opacity-100 group-hover:text-black dark:group-hover:text-white transition-colors duration-500 z-10 w-full mb-8 md:mb-0">
                     <span>[{idx + 1}]</span>
                     <span>{proj.year}</span>
                 </div>
                 
-                <!-- Number watermark (Swissfolio style) -->
-                <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none z-0">
-                    <span class="text-[250px] font-black -rotate-90 group-hover:text-black transition-colors duration-500">0{idx + 1}</span>
+                <!-- Number watermark -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-[0.15] group-hover:opacity-0 transition-opacity duration-700 pointer-events-none z-0">
+                    <span class="text-[250px] font-black -rotate-90 transition-colors duration-500">0{idx + 1}</span>
                 </div>
 
                 <!-- Info -->
                 <div class="w-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <div class="w-6 h-[1px] bg-text mb-4 group-hover:bg-black group-hover:w-12 transition-all duration-500"></div>
-                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-2 group-hover:text-black transition-colors duration-500">{proj.title}</h3>
-                    <p class="text-[10px] uppercase tracking-widest italic group-hover:text-black/80 transition-colors duration-500">{proj.tags}</p>
+                    <div class="w-6 h-[1px] bg-text mb-4 group-hover:bg-black dark:group-hover:bg-white transition-all duration-500"></div>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-2 group-hover:text-black dark:group-hover:text-white transition-colors duration-500">{proj.title}</h3>
+                    <p class="text-[10px] uppercase tracking-widest italic group-hover:text-black/80 dark:group-hover:text-white/80 transition-colors duration-500">{proj.tags}</p>
                 </div>
             </div>
         ))}

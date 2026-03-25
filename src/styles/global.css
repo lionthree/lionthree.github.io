@@ -6,27 +6,36 @@
   ========================================
 */
 :root {
-  --bg: #F2F0EF;
-  /* Fondo Claro */
-  --text: #1b6bff;
-  /* Texto Oscuro */
-  --border: rgba(0, 0, 0, 0.2);
-  /* Líneas Claras */
+  --bg: #1b6bff;
+  /* Fondo Azul */
+  --bg-end: #0a2d73;
+  /* Fondo final Azul Oscuro */
+  --text: #FFFAFA;
+  /* Texto Blanco */
+  --border: rgba(255, 255, 255, 0.2);
+  /* Líneas Blancas translúcidas */
+  --glow: hsla(0, 100%, 99%, 0.70);
+  /* Glow normal */
 }
 
 /* Modo Oscuro */
 :root.dark {
   --bg: #111827;
   /* Fondo Oscuro */
-  --text: #ffffff;
+  --bg-end: #000000;
+  /* Fondo Negro */
+  --text: #FFFAFA;
   /* Texto Claro */
   --border: rgba(255, 255, 255, 0.15);
   /* Líneas Oscuras */
+  --glow: hsla(0, 100%, 99%, 0.70);
+  /* Glow Sutil */
 }
 
 /* Inyectar variables a Tailwind (Usar como: bg-bg, text-text, border-border) */
 @theme {
   --color-bg: var(--bg);
+  --color-bg-end: var(--bg-end);
   --color-text: var(--text);
   --color-border: var(--border);
 }
@@ -107,7 +116,7 @@
   pointer-events: none;
   /* Un gradiente radial suave que se añade detrás de los textos */
   background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgb(255, 255, 255),
+      var(--glow, rgba(255, 255, 255, 0.15)),
       transparent 100%);
   z-index: -1;
   transition: opacity 0.4s ease;
@@ -157,21 +166,41 @@ html,
 }
 
 /* Theme Toggle Explicit Transforms */
-#sun-icon { transform: rotate(0deg) scale(1); }
-#moon-icon { transform: rotate(90deg) scale(0); }
-:root.dark #sun-icon { transform: rotate(-90deg) scale(0); }
-:root.dark #moon-icon { transform: rotate(0deg) scale(1); }
+#sun-icon {
+  transform: rotate(0deg) scale(1);
+}
+
+#moon-icon {
+  transform: rotate(90deg) scale(0);
+}
+
+:root.dark #sun-icon {
+  transform: rotate(-90deg) scale(0);
+}
+
+:root.dark #moon-icon {
+  transform: rotate(0deg) scale(1);
+}
 
 /* Custom cursor only for non-touch devices */
 @media (pointer: fine) {
-  * { cursor: none !important; }
-  #brutalist-cursor { display: flex; }
+  * {
+    cursor: none !important;
+  }
+
+  #brutalist-cursor {
+    display: flex;
+  }
 }
+
 @media (pointer: coarse) {
-  #brutalist-cursor { display: none !important; }
+  #brutalist-cursor {
+    display: none !important;
+  }
 }
 
 /* Offset for floating capsule header */
-section[id], footer[id] {
+section[id],
+footer[id] {
   scroll-margin-top: 120px;
 }
